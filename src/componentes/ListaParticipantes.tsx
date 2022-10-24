@@ -1,3 +1,13 @@
+import { useListaDeParticipantes } from "../state/hook/useListaDeParticipantes"
+
 const ListaParticipantes = () => {
-    const a = 
+    const participantes: string[] = useListaDeParticipantes()
+
+    return (
+        <ul>
+            {participantes.map(participante => <li key={participante}>{participante}</li>)}
+        </ul>
+    )
 }
+
+export default ListaParticipantes

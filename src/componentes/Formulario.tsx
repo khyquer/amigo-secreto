@@ -1,38 +1,43 @@
-import { useState, useRef } from "react"
-import { useAdicionarParticipante } from "../state/hook/useAdicionarParticipante"
-import { useMensagemDeErro } from "../state/hook/useMensagemDeErro"
+import { useState, useRef } from 'react'
+import { useAdicionarParticipante } from '../state/hook/useAdicionarParticipante'
+import { useMensagemDeErro } from '../state/hook/useMensagemDeErro'
+
+import './Formulario.css'
 
 const Formuario = () => {
-	
-    const [nome, setNome] = useState('')
+	const [nome, setNome] = useState('')
 
-    const inputRef = useRef<HTMLInputElement>(null)
+	const inputRef = useRef<HTMLInputElement>(null)
 
-    const adicionarParticipante = (evento: React.FormEvent<HTMLFormElement>) => {
-        evento.preventDefault()
+	const adicionarParticipante = (
+		evento: React.FormEvent<HTMLFormElement>
+	) => {
+		evento.preventDefault()
 
-        adicionarNaLista(nome)
-        setNome('')
-        inputRef.current?.focus()
-    }
+		adicionarNaLista(nome)
+		setNome('')
+		inputRef.current?.focus()
+	}
 
-    const adicionarNaLista = useAdicionarParticipante()
+	const adicionarNaLista = useAdicionarParticipante()
 
-    const mensagemDeErro = useMensagemDeErro()
-    
-    return (
+	const mensagemDeErro = useMensagemDeErro()
+
+	return (
 		<form onSubmit={adicionarParticipante}>
-			<input
-                ref={inputRef}
-				type='text'
-                value={nome}
-                onChange={evento => setNome(evento.target.value)}
-				placeholder='Insira os nomes dos participantes'
-			/>
+			<div className='grupo-input-btn'>
+				<input
+					ref={inputRef}
+					type='text'
+					value={nome}
+					onChange={(evento) => setNome(evento.target.value)}
+					placeholder='Insira os nomes dos participantes'
+				/>
 
-			<button disabled={!nome}>Adicionar</button>
+				<button disabled={!nome}>Adicionar</button>
+			</div>
 
-            {mensagemDeErro && <p role='alert'>{mensagemDeErro}</p>}
+			{mensagemDeErro && <p className="alerta erro" role='alert'>{mensagemDeErro}</p>}
 		</form>
 	)
 }

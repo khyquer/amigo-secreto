@@ -1,17 +1,28 @@
-import { useRecoilValue } from "recoil"
-import { useListaDeParticipantes } from "../state/hook/useListaDeParticipantes"
+import { useNavigate } from 'react-router-dom'
+import { useListaDeParticipantes } from '../state/hook/useListaDeParticipantes'
+
+
+import './Rodape.css'
 
 const Rodape = () => {
-    
-    const participantes = useListaDeParticipantes()
+	const participantes = useListaDeParticipantes()
 
-    const buttonIsDisabledWhen = participantes.length <= 2
+	const buttonIsDisabledWhen = participantes.length <= 2
 
-    return (
-        <footer>
-            <button disabled={buttonIsDisabledWhen}>Iniciar Brincadeira</button>
-        </footer>
-    )
+	const navegarPara = useNavigate()
+
+	const iniciar = () => {
+		navegarPara('/sorteio')
+	}
+
+	return (
+		<footer  className="rodape-configuracoes">
+			<button className="botao" onClick={iniciar} disabled={buttonIsDisabledWhen}>
+				Iniciar Brincadeira
+			</button>
+			<img src="/imagens/sacolas.png" alt="Sacolas de compras" />
+		</footer>
+	)
 }
 
 export default Rodape

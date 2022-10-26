@@ -70,6 +70,23 @@ describe('o comportamento do formulário.tsx', () => {
 			'Nome duplicados não são permitidos!'
 		)
 	})
+	test('lista não pode receber nome com apenas 1 caráctere', () => {
+		const [input, botao] = prepararAmbienteDeTeste()
+
+		fireEvent.change(input, {
+			target: {
+				value: 'a',
+			},
+		})
+
+		fireEvent.click(botao)
+
+		const mensagemDeErro = screen.getByRole('alert')
+
+		expect(mensagemDeErro.textContent).toBe(
+			'Nome muito curto!'
+		)
+	})
 
 	test('testar se a mensagem de erro some após 3 segundos', () => {
 		jest.useFakeTimers()

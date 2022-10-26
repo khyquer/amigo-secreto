@@ -23,6 +23,18 @@ export const useAdicionarParticipante = () => {
             return
         }
 
+
+        const condition2 = nomeDoParticipanteUPPERCASE.length === 1 ? true : false
+
+        if(condition2){
+            setErro('Nome muito curto!')
+
+            setTimeout(() => {
+                setErro('')
+            }, 5000)
+            return
+        }
+
         return setLista(listaAtual => [...listaAtual, nomeDoParticipanteUPPERCASE])
     }
 }

@@ -8,6 +8,8 @@ import './Sorteio.css'
 const Sorteio = () => {
 	const participantes = useListaDeParticipantes()
 
+	const participantesOrdenados = [...participantes].sort()
+
 	const [participanteDaVez, setParticipanteDaVez] = useState('')
 	const [amigoSecreto, setAmigoSecreto] = useState('')
 
@@ -34,7 +36,7 @@ const Sorteio = () => {
 							setParticipanteDaVez(evento.target.value)
 						}>
 						<option>Selecione o participante</option>
-						{participantes.map((participante) => (
+						{participantesOrdenados.map((participante) => (
 							<option key={participante}>{participante}</option>
 						))}
 					</select>
@@ -43,7 +45,7 @@ const Sorteio = () => {
 						Clique em em sortear para ver quem é seu amigo secreto!
 					</p>
 
-					<button>Sortear</button>
+					<button className='botao-sortear'>Sortear</button>
 				</form>
 				{amigoSecreto && (
 					<p className='resultado' role='alert'>

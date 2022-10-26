@@ -10,7 +10,9 @@ export const useAdicionarParticipante = () => {
 
     return (nomeDoParticipante: string) => {
 
-        const condition = listaAtual.includes(nomeDoParticipante)
+        const nomeDoParticipanteUPPERCASE = nomeDoParticipante.toUpperCase()
+
+        const condition = listaAtual.includes(nomeDoParticipanteUPPERCASE)
 
         if(condition){
             setErro('Nome duplicados não são permitidos!')
@@ -21,6 +23,6 @@ export const useAdicionarParticipante = () => {
             return
         }
 
-        return setLista(listaAtual => [...listaAtual, nomeDoParticipante])
+        return setLista(listaAtual => [...listaAtual, nomeDoParticipanteUPPERCASE])
     }
 }
